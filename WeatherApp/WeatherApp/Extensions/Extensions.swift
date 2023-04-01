@@ -25,11 +25,12 @@ extension View {
 
 struct RoundedCorner: Shape {
     //called by cornerRadius
-    var radius: CGFloat = .infinity
-    var corners: UIRectCorner = .allCorners
+    var radius: CGFloat = .infinity //specifies the radius of the rounded corners
+    var corners: UIRectCorner = .allCorners //specifies which corners of the rectangle should be rounded
     
     func path(in rect: CGRect) -> Path {
+        //creates a UIBezierPath object with rounded corners
         let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        return Path(path.cgPath)
+        return Path(path.cgPath) //returns the object
     }
 }
