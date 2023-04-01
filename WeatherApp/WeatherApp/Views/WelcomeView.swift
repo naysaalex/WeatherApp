@@ -26,6 +26,7 @@ struct WelcomeView: View {
             .multilineTextAlignment(.center)
             .padding()
             
+            //second subview is a button that calls the requestLocation() method on the locationManager object when tapped
             LocationButton(.shareCurrentLocation) {
                 locationManager.requestLocation()
             }
@@ -33,7 +34,7 @@ struct WelcomeView: View {
             .symbolVariant(.fill)
             .foregroundColor(.white)
         } // VStack
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: .infinity) //view takes up all the available space
         
     }
 }
