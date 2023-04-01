@@ -11,18 +11,22 @@ import SwiftUI
 
 struct ContentView: View {
     // MARK: - Properties
-    @StateObject var locationManager = LocationManager()
-    var weatherManager = WeatherManager()
-    @State var weather: ResponseBody?
+    
+    @StateObject var locationManager = LocationManager() //creates a LocationManager instance that is owned by this view
+    var weatherManager = WeatherManager() //weatherManager instance
+    @State var weather: ResponseBody? //creates weather property that can be modified by this view
     
     // MARK: - Body
     var body: some View {
         VStack {
             
+            //check for location first
             if let location = locationManager.location {
                 if let weather = weather {
+                    //show weather view if you have weather data for location
                     WeatherView(weather: weather)
                 } else {
+                    //if weather data is not available, loading view
                     LoadingView()
                         .task {
                             do {
@@ -34,6 +38,7 @@ struct ContentView: View {
                         }
                 }
             } else {
+                //welcomeView if the location isn't available
                 if locationManager.isLoading {
                     LoadingView()
                 } else {
