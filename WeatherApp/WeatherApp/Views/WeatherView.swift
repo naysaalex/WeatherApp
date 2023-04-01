@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WeatherView: View {
     // MARK: - Properties
-    var weather: ResponseBody
+    var weather: ResponseBody //weather data to display
     
     // MARK: - Body
     var body: some View {
@@ -18,15 +18,18 @@ struct WeatherView: View {
             // MARK: - City and date
             VStack {
                 VStack(alignment: .leading, spacing: 5) {
+                    //app title
                     Text("Weather App")
                         .bold()
                         .font(.title3)
                         .padding(.bottom, 6)
                     
+                    //city name
                     Text(weather.name)
                         .bold()
                         .font(.headline)
                     
+                    //current date
                     Text("Today, \(Date().formatted(.dateTime.month().day().hour().minute()))")
                         .fontWeight(.light)
                         .font(.subheadline)
@@ -39,15 +42,18 @@ struct WeatherView: View {
                 VStack {
                     HStack {
                         VStack(spacing: 20) {
+                            //weather icon
                             Image(systemName: "sun.max")
                                 .font(.system(size: 40))
                             
+                            //weather description
                             Text("\(weather.weather[0].main)")
                         }
                         .frame(width: 150, alignment: .leading)
                         
                         Spacer()
                         
+                        //temperature
                         Text(weather.main.feelsLike.roundDouble() + "°")
                             .font(.system(size: 80))
                             .fontWeight(.bold)
@@ -57,6 +63,7 @@ struct WeatherView: View {
                     Spacer()
                         .frame(height: 80)
                     
+                    //background image
                     AsyncImage(url: URL(string: "https://cdn.pixabay.com/photo/2020/01/24/21/33/city-4791269_960_720.png")) { image in
                         image
                             .resizable()
@@ -78,25 +85,30 @@ struct WeatherView: View {
                 Spacer()
                 
                 VStack(alignment: .leading, spacing: 20) {
+                //weather details title
                     Text("Weather now")
                         .bold()
                         .padding(.bottom)
                     
                     HStack {
+                        //minimum temp
                         WeatherRow(logo: "thermometer", name: "Min temp", value:
                                     (weather.main.tempMin
                                     .roundDouble() + "°"))
                         Spacer()
+                        //maximum temp
                         WeatherRow(logo: "thermometer", name: "Max temp", value:
                                     (weather.main.tempMax
                                     .roundDouble() + "°"))
                     } // HStack
                     
                     HStack {
+                        //wind speed
                         WeatherRow(logo: "wind", name: "Wind speed", value:
                                     (weather.wind.speed
                                     .roundDouble() + "m/s"))
                         Spacer()
+                        //humidity
                         WeatherRow(logo: "humidity", name: "Humidity", value:
                                     (weather.main.humidity
                                     .roundDouble() + "%"))
